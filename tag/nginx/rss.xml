@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>大海啊，全是水 • Posts by &#34;nginx&#34; tag</title>
+        <title>星辰大海 • Posts by &#34;nginx&#34; tag</title>
         <link>http://liuh.cc</link>
         <description>学习、编程、生活</description>
         <language>zh-CN</language>
@@ -13,6 +13,8 @@
         <category>Linux</category>
         <category>Centos</category>
         <category>Shell</category>
+        <category>古代</category>
+        <category>名言</category>
         <item>
             <guid isPermalink="true">http://liuh.cc/2022/09/f92ce47.html</guid>
             <title>Nginx/Openresty日志时间显示到毫秒级的三种方法(不改源码)</title>
