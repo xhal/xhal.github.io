@@ -3,11 +3,11 @@
   <title>星辰大海</title>
   
   <subtitle>立德、立功、立言</subtitle>
-  <link href="http://liuh.cc/atom.xml" rel="self"/>
+  <link href="http://xsea.cc/atom.xml" rel="self"/>
   
-  <link href="http://liuh.cc/"/>
+  <link href="http://xsea.cc/"/>
   <updated>2023-03-14T14:59:08.452Z</updated>
-  <id>http://liuh.cc/</id>
+  <id>http://xsea.cc/</id>
   
   <author>
     <name>Liuh</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Linux/Centos 环境Shell会话关闭后，本会话启动进程被终止</title>
-    <link href="http://liuh.cc/2023/02/37631c5.html"/>
-    <id>http://liuh.cc/2023/02/37631c5.html</id>
+    <link href="http://xsea.cc/2023/02/37631c5.html"/>
+    <id>http://xsea.cc/2023/02/37631c5.html</id>
     <published>2023-02-13T13:27:04.000Z</published>
     <updated>2023-03-14T14:59:08.452Z</updated>
     
@@ -33,21 +33,21 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Linux" scheme="http://liuh.cc/tags/Linux/"/>
+    <category term="Linux" scheme="http://xsea.cc/tags/Linux/"/>
     
-    <category term="Centos" scheme="http://liuh.cc/tags/Centos/"/>
+    <category term="Centos" scheme="http://xsea.cc/tags/Centos/"/>
     
-    <category term="Shell" scheme="http://liuh.cc/tags/Shell/"/>
+    <category term="Shell" scheme="http://xsea.cc/tags/Shell/"/>
     
   </entry>
   
   <entry>
     <title>Redis7 源码安装</title>
-    <link href="http://liuh.cc/2023/01/dacefe23.html"/>
-    <id>http://liuh.cc/2023/01/dacefe23.html</id>
+    <link href="http://xsea.cc/2023/01/dacefe23.html"/>
+    <id>http://xsea.cc/2023/01/dacefe23.html</id>
     <published>2023-01-02T13:03:52.000Z</published>
     <updated>2023-03-14T14:59:08.452Z</updated>
     
@@ -60,17 +60,17 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Redis" scheme="http://liuh.cc/tags/Redis/"/>
+    <category term="Redis" scheme="http://xsea.cc/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>Redis+Keepalived_实现双机主从互备【互为主从、主从自动切换】</title>
-    <link href="http://liuh.cc/2022/10/8b778184.html"/>
-    <id>http://liuh.cc/2022/10/8b778184.html</id>
+    <link href="http://xsea.cc/2022/10/8b778184.html"/>
+    <id>http://xsea.cc/2022/10/8b778184.html</id>
     <published>2022-10-06T02:30:03.000Z</published>
     <updated>2023-03-15T16:09:42.828Z</updated>
     
@@ -84,17 +84,17 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Redis" scheme="http://liuh.cc/tags/Redis/"/>
+    <category term="Redis" scheme="http://xsea.cc/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>Nginx/Openresty日志时间显示到毫秒级的三种方法(不改源码)</title>
-    <link href="http://liuh.cc/2022/09/f92ce47.html"/>
-    <id>http://liuh.cc/2022/09/f92ce47.html</id>
+    <link href="http://xsea.cc/2022/09/f92ce47.html"/>
+    <id>http://xsea.cc/2022/09/f92ce47.html</id>
     <published>2022-09-09T02:06:08.000Z</published>
     <updated>2023-03-14T14:59:08.452Z</updated>
     
@@ -108,19 +108,19 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Openresty" scheme="http://liuh.cc/tags/Openresty/"/>
+    <category term="Openresty" scheme="http://xsea.cc/tags/Openresty/"/>
     
-    <category term="Nginx" scheme="http://liuh.cc/tags/Nginx/"/>
+    <category term="Nginx" scheme="http://xsea.cc/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>Centos7.9_源码安装Openresty1.21.4.1</title>
-    <link href="http://liuh.cc/2022/09/333f749f.html"/>
-    <id>http://liuh.cc/2022/09/333f749f.html</id>
+    <link href="http://xsea.cc/2022/09/333f749f.html"/>
+    <id>http://xsea.cc/2022/09/333f749f.html</id>
     <published>2022-09-06T03:50:08.000Z</published>
     <updated>2023-03-14T14:59:08.451Z</updated>
     
@@ -134,17 +134,17 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Openresty" scheme="http://liuh.cc/tags/Openresty/"/>
+    <category term="Openresty" scheme="http://xsea.cc/tags/Openresty/"/>
     
   </entry>
   
   <entry>
     <title>Centos7.9_源码安装Redis_5.x</title>
-    <link href="http://liuh.cc/2022/08/4b3066d5.html"/>
-    <id>http://liuh.cc/2022/08/4b3066d5.html</id>
+    <link href="http://xsea.cc/2022/08/4b3066d5.html"/>
+    <id>http://xsea.cc/2022/08/4b3066d5.html</id>
     <published>2022-08-08T00:18:08.000Z</published>
     <updated>2023-03-15T16:09:42.828Z</updated>
     
@@ -158,19 +158,19 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Redis" scheme="http://liuh.cc/tags/Redis/"/>
+    <category term="Redis" scheme="http://xsea.cc/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>Centos7.9使用yum安装Nginx</title>
-    <link href="http://liuh.cc/2022/04/eb7cc45c.html"/>
-    <id>http://liuh.cc/2022/04/eb7cc45c.html</id>
+    <link href="http://xsea.cc/2022/04/eb7cc45c.html"/>
+    <id>http://xsea.cc/2022/04/eb7cc45c.html</id>
     <published>2022-04-16T04:30:08.000Z</published>
-    <updated>2023-03-16T15:46:57.732Z</updated>
+    <updated>2023-03-16T15:47:05.619Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="centos79使用yum安装nginx"><a class="markdownIt-Anchor" href="#centos79使用yum安装nginx">#</a> Centos7.9 使用 yum 安装 Nginx</h1><h1 id=""><a class="markdownIt-Anchor" href="#">#</a> </h1><p>在 CentOS 7.9 上使用 yum 安装 Nginx 非常简单。下面是几个简单步骤：</p><h2 id="步骤一更新系统"><a class="markdownIt-Anchor" href="#步骤一更新系统">#</a> 步骤一：更新系统</h2><p>首先，您需要更新系统以获取最新的软件包和安全修复程序。使用以下命令更新系统：</p><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> yum update</pre></td></tr></table></figure><h2 id="步骤二安装-nginx"><a class="markdownIt-Anchor" href="#步骤二安装-nginx">#</a> 步骤二：安装 nginx</h2><p>安装 Nginx 非常简单，只需使用以下命令：</p><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> yum <span class="token function">install</span> nginx</pre></td></tr></table></figure><p>然后开始安装过程，等待几分钟，Nginx 将安装在您的系统上。</p><p>‍</p><h2 id="步骤三启动-nginx-的服务"><a class="markdownIt-Anchor" href="#步骤三启动-nginx-的服务">#</a> 步骤三：启动 nginx 的服务</h2><p>Nginx 安装完毕后，可以使用以下命令启动 Nginx 服务：</p><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> systemctl start nginx</pre></td></tr></table></figure><p>启动命令行后，可以使用以下命令检查 Nginx 服务是否正在运行：</p><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> systemctl status nginx</pre></td></tr></table></figure><h2 id="步骤四配置-nginx"><a class="markdownIt-Anchor" href="#步骤四配置-nginx">#</a> 步骤四：配置 Nginx</h2><p>Nginx 的默认配置文件位于 /etc/nginx/nginx.conf 中。您可以根据需要更改配置文件。在更改配置之后，您需要重新启动 Nginx 服务。使用以下命令重新启动 Nginx 服务：</p><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> systemctl restart nginx</pre></td></tr></table></figure><p>Nginx 安装完毕，您可以尝试使用 Web 服务器上的 IP 地址或域名访问网站。</p><p>‍</p>]]></content>
     
@@ -182,17 +182,17 @@
     
     
     
-    <category term="运维部署" scheme="http://liuh.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
     
     
-    <category term="Nginx" scheme="http://liuh.cc/tags/Nginx/"/>
+    <category term="Nginx" scheme="http://xsea.cc/tags/Nginx/"/>
     
   </entry>
   
   <entry>
     <title>何谓立德、立功、立言（三不朽）</title>
-    <link href="http://liuh.cc/2022/03/7c550628.html"/>
-    <id>http://liuh.cc/2022/03/7c550628.html</id>
+    <link href="http://xsea.cc/2022/03/7c550628.html"/>
+    <id>http://xsea.cc/2022/03/7c550628.html</id>
     <published>2022-03-11T14:59:50.000Z</published>
     <updated>2023-03-15T16:09:42.828Z</updated>
     
@@ -205,12 +205,12 @@
     
     
     
-    <category term="文学" scheme="http://liuh.cc/categories/%E6%96%87%E5%AD%A6/"/>
+    <category term="文学" scheme="http://xsea.cc/categories/%E6%96%87%E5%AD%A6/"/>
     
     
-    <category term="古代" scheme="http://liuh.cc/tags/%E5%8F%A4%E4%BB%A3/"/>
+    <category term="古代" scheme="http://xsea.cc/tags/%E5%8F%A4%E4%BB%A3/"/>
     
-    <category term="名言" scheme="http://liuh.cc/tags/%E5%90%8D%E8%A8%80/"/>
+    <category term="名言" scheme="http://xsea.cc/tags/%E5%90%8D%E8%A8%80/"/>
     
   </entry>
   

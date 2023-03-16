@@ -2,7 +2,7 @@
 <rss version="2.0">
     <channel>
         <title>星辰大海 • Posts by &#34;linux&#34; tag</title>
-        <link>http://liuh.cc</link>
+        <link>http://xsea.cc</link>
         <description>学习、编程、生活</description>
         <language>zh-CN</language>
         <pubDate>Mon, 13 Feb 2023 21:27:04 +0800</pubDate>
@@ -16,9 +16,9 @@
         <category>古代</category>
         <category>名言</category>
         <item>
-            <guid isPermalink="true">http://liuh.cc/2023/02/37631c5.html</guid>
+            <guid isPermalink="true">http://xsea.cc/2023/02/37631c5.html</guid>
             <title>Linux/Centos 环境Shell会话关闭后，本会话启动进程被终止</title>
-            <link>http://liuh.cc/2023/02/37631c5.html</link>
+            <link>http://xsea.cc/2023/02/37631c5.html</link>
             <category>Linux</category>
             <category>Centos</category>
             <category>Shell</category>

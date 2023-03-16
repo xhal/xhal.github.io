@@ -2,11 +2,11 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "星辰大海 • All posts by \"centos\" tag",
     "description": "学习、编程、生活",
-    "home_page_url": "http://liuh.cc",
+    "home_page_url": "http://xsea.cc",
     "items": [
         {
-            "id": "http://liuh.cc/2023/02/37631c5.html",
-            "url": "http://liuh.cc/2023/02/37631c5.html",
+            "id": "http://xsea.cc/2023/02/37631c5.html",
+            "url": "http://xsea.cc/2023/02/37631c5.html",
             "title": "Linux/Centos 环境Shell会话关闭后，本会话启动进程被终止",
             "date_published": "2023-02-13T13:27:04.000Z",
             "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"/assets/css/APlayer.min.css\"><script src=\"/assets/js/APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><blockquote>\n<p>原因排查：Linux/Centos 环境 Shell 会话关闭后，本会话启动进程被终止</p>\n<p>记录下工作中遇到的问题，希望给遇到的小伙伴参考</p>\n</blockquote>\n<span id=\"more\"></span>\n<p>原文链接： <span class=\"exturl\" data-url=\"aHR0cHM6Ly9hc2suY3Nkbi5uZXQvcXVlc3Rpb25zLzc4ODEyOTQvNTQwNjA2OTE=\">Linux/Centos 环境 shell 会话关闭后，java 进程被结束</span></p>\n<h3 id=\"一-操作环境-软件版本等信息\"><a class=\"markdownIt-Anchor\" href=\"#一-操作环境-软件版本等信息\">#</a> 一、操作环境、软件版本等信息</h3>\n<blockquote>\n<p>Centos 7.9.2009</p>\n<p>Java8</p>\n</blockquote>\n<h3 id=\"二-问题场景\"><a class=\"markdownIt-Anchor\" href=\"#二-问题场景\">#</a> 二、问题场景：</h3>\n<blockquote>\n<p>1、 原启动命令  <code>java -jar xxx.jar &gt; test.log 2&gt;&amp;1 &amp;</code>  在  <code>start.sh</code>  脚本文件里</p>\n<p>2、有两台一样的服务器， 环境配置都一样； 之前一直是正常的（shell 会话关闭，也可正常运行）</p>\n<p>3、其中一台重启后，手动上去执行此脚本启动后；会话关闭进程就没了</p>\n</blockquote>\n<h3 id=\"三-尝试过的解决方法\"><a class=\"markdownIt-Anchor\" href=\"#三-尝试过的解决方法\">#</a> 三、尝试过的解决方法</h3>\n<blockquote>\n<p>1、 在命令前增加  <code>nohup</code>  ， 尝试无效</p>\n<p>2、 在命令前增加  <code>nohup</code>  ，并使用 exit 退出 shell 会话， 尝试无效</p>\n<p>3、 检查设置参数 shopt huponexit huponexit 原本值就为 off, 尝试重新设置后， 一样无效</p>\n<p>4、 使用  <code>screen</code>  启动， 尝试无效</p>\n</blockquote>\n<h3 id=\"四-最终排查原因-及-解决方案\"><a class=\"markdownIt-Anchor\" href=\"#四-最终排查原因-及-解决方案\">#</a> 四、最终排查原因 及 解决方案</h3>\n<h4 id=\"问题原因-ssh-版本被更新\"><a class=\"markdownIt-Anchor\" href=\"#问题原因-ssh-版本被更新\">#</a> 问题原因：  <code>SSH</code>  版本被更新</h4>\n<blockquote>\n<p>没问题的服务器 SSH 版本（旧的）： 7.4p1</p>\n<p>有问题的服务器 SSH 版本（新的）： 8.9p1</p>\n</blockquote>\n<h4 id=\"解决方案\"><a class=\"markdownIt-Anchor\" href=\"#解决方案\">#</a> 解决方案：</h4>\n<p>在  <code>ssh@.service</code>  中 [Service] 节点下，添加  <code>KillMode=process</code>  后</p>\n<p>使用命令  <code>systemctl restart sshd.service</code>  重启 sshd 服务</p>\n<p>参考连接：<br>\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYnl6Z3NzL3AvMTU1NzMzNDQuaHRtbA==\">https://www.cnblogs.com/byzgss/p/15573344.html</span></p>\n",
