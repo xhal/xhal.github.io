@@ -68,6 +68,16 @@
             ]
         },
         {
+            "id": "http://liuh.cc/2022/04/eb7cc45c.html",
+            "url": "http://liuh.cc/2022/04/eb7cc45c.html",
+            "title": "Centos7.9使用yum安装Nginx",
+            "date_published": "2022-04-16T04:30:08.000Z",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"/assets/css/APlayer.min.css\"><script src=\"/assets/js/APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"centos79使用yum安装nginx\"><a class=\"markdownIt-Anchor\" href=\"#centos79使用yum安装nginx\">#</a> Centos7.9 使用 yum 安装 Nginx</h1>\n<h1 id=\"\"><a class=\"markdownIt-Anchor\" href=\"#\">#</a> </h1>\n<p>在 CentOS 7.9 上使用 yum 安装 Nginx 非常简单。下面是几个简单步骤：</p>\n<h2 id=\"步骤一更新系统\"><a class=\"markdownIt-Anchor\" href=\"#步骤一更新系统\">#</a> 步骤一：更新系统</h2>\n<p>首先，您需要更新系统以获取最新的软件包和安全修复程序。使用以下命令更新系统：</p>\n<figure class=\"highlight sh\"><figcaption data-lang=\"sh\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">sudo</span> yum update</pre></td></tr></table></figure><h2 id=\"步骤二安装-nginx\"><a class=\"markdownIt-Anchor\" href=\"#步骤二安装-nginx\">#</a> 步骤二：安装 nginx</h2>\n<p>安装 Nginx 非常简单，只需使用以下命令：</p>\n<figure class=\"highlight sh\"><figcaption data-lang=\"sh\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">sudo</span> yum <span class=\"token function\">install</span> nginx</pre></td></tr></table></figure><p>然后开始安装过程，等待几分钟，Nginx 将安装在您的系统上。</p>\n<p>‍</p>\n<h2 id=\"步骤三启动-nginx-的服务\"><a class=\"markdownIt-Anchor\" href=\"#步骤三启动-nginx-的服务\">#</a> 步骤三：启动 nginx 的服务</h2>\n<p>Nginx 安装完毕后，可以使用以下命令启动 Nginx 服务：</p>\n<figure class=\"highlight sh\"><figcaption data-lang=\"sh\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">sudo</span> systemctl start nginx</pre></td></tr></table></figure><p>启动命令行后，可以使用以下命令检查 Nginx 服务是否正在运行：</p>\n<figure class=\"highlight sh\"><figcaption data-lang=\"sh\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">sudo</span> systemctl status nginx</pre></td></tr></table></figure><h2 id=\"步骤四配置-nginx\"><a class=\"markdownIt-Anchor\" href=\"#步骤四配置-nginx\">#</a> 步骤四：配置 Nginx</h2>\n<p>Nginx 的默认配置文件位于 /etc/nginx/nginx.conf 中。您可以根据需要更改配置文件。在更改配置之后，您需要重新启动 Nginx 服务。使用以下命令重新启动 Nginx 服务：</p>\n<figure class=\"highlight sh\"><figcaption data-lang=\"sh\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">sudo</span> systemctl restart nginx</pre></td></tr></table></figure><p>Nginx 安装完毕，您可以尝试使用 Web 服务器上的 IP 地址或域名访问网站。</p>\n<p>‍</p>\n",
+            "tags": [
+                "Nginx"
+            ]
+        },
+        {
             "id": "http://liuh.cc/2022/03/7c550628.html",
             "url": "http://liuh.cc/2022/03/7c550628.html",
             "title": "何谓立德、立功、立言（三不朽）",

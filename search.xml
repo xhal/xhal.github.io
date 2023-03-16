@@ -234,4 +234,31 @@ https://www.cnblogs.com/byzgss/p/15573344.html
         <tag>名言</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Centos7.9使用yum安装Nginx</title>
+    <url>/2022/04/eb7cc45c.html</url>
+    <content><![CDATA[# Centos7.9 使用 yum 安装 Nginx
+# 
+在 CentOS 7.9 上使用 yum 安装 Nginx 非常简单。下面是几个简单步骤：
+# 步骤一：更新系统
+首先，您需要更新系统以获取最新的软件包和安全修复程序。使用以下命令更新系统：
+sudo yum update# 步骤二：安装 nginx
+安装 Nginx 非常简单，只需使用以下命令：
+sudo yum install nginx然后开始安装过程，等待几分钟，Nginx 将安装在您的系统上。
+‍
+# 步骤三：启动 nginx 的服务
+Nginx 安装完毕后，可以使用以下命令启动 Nginx 服务：
+sudo systemctl start nginx启动命令行后，可以使用以下命令检查 Nginx 服务是否正在运行：
+sudo systemctl status nginx# 步骤四：配置 Nginx
+Nginx 的默认配置文件位于 /etc/nginx/nginx.conf 中。您可以根据需要更改配置文件。在更改配置之后，您需要重新启动 Nginx 服务。使用以下命令重新启动 Nginx 服务：
+sudo systemctl restart nginxNginx 安装完毕，您可以尝试使用 Web 服务器上的 IP 地址或域名访问网站。
+‍
+]]></content>
+      <categories>
+        <category>运维部署</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
 </search>

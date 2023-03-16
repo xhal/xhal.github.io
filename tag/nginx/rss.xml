@@ -34,5 +34,29 @@
 &lt;/blockquote&gt;
  ]]></description>
         </item>
+        <item>
+            <guid isPermalink="true">http://liuh.cc/2022/04/eb7cc45c.html</guid>
+            <title>Centos7.9使用yum安装Nginx</title>
+            <link>http://liuh.cc/2022/04/eb7cc45c.html</link>
+            <category>Nginx</category>
+            <pubDate>Sat, 16 Apr 2022 12:30:08 +0800</pubDate>
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;/assets/css/APlayer.min.css&#34;&gt;&lt;script src=&#34;/assets/js/APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;centos79使用yum安装nginx&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#centos79使用yum安装nginx&#34;&gt;#&lt;/a&gt; Centos7.9 使用 yum 安装 Nginx&lt;/h1&gt;
+&lt;h1 id=&#34;&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#&#34;&gt;#&lt;/a&gt; &lt;/h1&gt;
+&lt;p&gt;在 CentOS 7.9 上使用 yum 安装 Nginx 非常简单。下面是几个简单步骤：&lt;/p&gt;
+&lt;h2 id=&#34;步骤一更新系统&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤一更新系统&#34;&gt;#&lt;/a&gt; 步骤一：更新系统&lt;/h2&gt;
+&lt;p&gt;首先，您需要更新系统以获取最新的软件包和安全修复程序。使用以下命令更新系统：&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum update&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;步骤二安装-nginx&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤二安装-nginx&#34;&gt;#&lt;/a&gt; 步骤二：安装 nginx&lt;/h2&gt;
+&lt;p&gt;安装 Nginx 非常简单，只需使用以下命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; yum &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; nginx&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;然后开始安装过程，等待几分钟，Nginx 将安装在您的系统上。&lt;/p&gt;
+&lt;p&gt;‍&lt;/p&gt;
+&lt;h2 id=&#34;步骤三启动-nginx-的服务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤三启动-nginx-的服务&#34;&gt;#&lt;/a&gt; 步骤三：启动 nginx 的服务&lt;/h2&gt;
+&lt;p&gt;Nginx 安装完毕后，可以使用以下命令启动 Nginx 服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl start nginx&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;启动命令行后，可以使用以下命令检查 Nginx 服务是否正在运行：&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl status nginx&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;步骤四配置-nginx&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#步骤四配置-nginx&#34;&gt;#&lt;/a&gt; 步骤四：配置 Nginx&lt;/h2&gt;
+&lt;p&gt;Nginx 的默认配置文件位于 /etc/nginx/nginx.conf 中。您可以根据需要更改配置文件。在更改配置之后，您需要重新启动 Nginx 服务。使用以下命令重新启动 Nginx 服务：&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; systemctl restart nginx&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;Nginx 安装完毕，您可以尝试使用 Web 服务器上的 IP 地址或域名访问网站。&lt;/p&gt;
+&lt;p&gt;‍&lt;/p&gt;
+ ]]></description>
+        </item>
     </channel>
 </rss>
