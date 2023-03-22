@@ -6,7 +6,7 @@
   <link href="http://xsea.cc/atom.xml" rel="self"/>
   
   <link href="http://xsea.cc/"/>
-  <updated>2023-03-14T14:59:08.452Z</updated>
+  <updated>2023-03-22T15:33:24.853Z</updated>
   <id>http://xsea.cc/</id>
   
   <author>
@@ -15,6 +15,84 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows切换JDK版本（Bat脚本）</title>
+    <link href="http://xsea.cc/2023/03/1e014c62.html"/>
+    <id>http://xsea.cc/2023/03/1e014c62.html</id>
+    <published>2023-03-21T06:46:57.000Z</published>
+    <updated>2023-03-22T15:33:24.853Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>当我们系统中有多个 JDK 版本时，要切换时每次都要手动修改：</p><p>右键打开我的电脑 &gt;&gt; 属性 &gt;&gt; 系统高级设置 &gt;&gt; 环境变量， 修改 JAVA_HOME 的值</p><p>非常麻烦，所以写个脚本，一键搞定；</p></blockquote><p>先来看看效果：</p><p><img data-src="http://img.xhal.cc/picgo/uTools_1679382309562.png" alt=""></p><p>我们将 JDK 统一放置在同一个目录下，比如  <code>D:\Env\Java</code></p><p>脚本简单实现逻辑，就是将这指定目录下，所有子目录都找出来，并按顺序生成编号</p><p>脚本根据用户输入的编号对应的目录，更新环境变量  <code>JAVA_HOME</code></p><p>脚本内容如下 (<strong>特别注意： 使用 GBK 编码保存脚本文件，否则会中文乱码</strong>)：</p><figure class="highlight powershell"><figcaption data-lang="PowerShell"></figcaption><table><tr><td data-num="1"></td><td><pre>@<span class="token function">echo</span> off</pre></td></tr><tr><td data-num="2"></td><td><pre>:: 获取管理员执行权限</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token operator">%</span>1 mshta vbscript:CreateObject<span class="token punctuation">(</span><span class="token string">"Shell.Application"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ShellExecute<span class="token punctuation">(</span><span class="token string">"cmd.exe"</span><span class="token punctuation">,</span><span class="token string">"/c %~s0 ::"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token string">"runas"</span><span class="token punctuation">,</span>1<span class="token punctuation">)</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>close<span class="token punctuation">)</span>&amp;&amp;<span class="token keyword">exit</span></pre></td></tr><tr><td data-num="4"></td><td><pre>cd <span class="token operator">/</span>d <span class="token string">"%~dp0"</span></pre></td></tr><tr><td data-num="5"></td><td><pre></pre></td></tr><tr><td data-num="6"></td><td><pre>:: 设置容器大小 及 标题</pre></td></tr><tr><td data-num="7"></td><td><pre>mode con cols=120 lines=30</pre></td></tr><tr><td data-num="8"></td><td><pre>title JDK-Version change script of Bat</pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre>setlocal EnableDelayedExpansion</pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>:menu</pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token function">echo</span> 当前 JDK 版本:</pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token function">echo</span> <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span></pre></td></tr><tr><td data-num="15"></td><td><pre>java <span class="token operator">-</span>version</pre></td></tr><tr><td data-num="16"></td><td><pre><span class="token function">echo</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token function">echo</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token function">echo</span> ========================================================</pre></td></tr><tr><td data-num="19"></td><td><pre><span class="token function">echo</span> <span class="token comment">################ JDK 版本切换，可选操作 ################</span></pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token function">echo</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="21"></td><td><pre><span class="token function">echo</span>          <span class="token punctuation">[</span>0<span class="token punctuation">]</span>  取消切换</pre></td></tr><tr><td data-num="22"></td><td><pre></pre></td></tr><tr><td data-num="23"></td><td><pre><span class="token function">set</span> <span class="token string">"options="</span></pre></td></tr><tr><td data-num="24"></td><td><pre><span class="token function">set</span> <span class="token string">"count=0"</span></pre></td></tr><tr><td data-num="25"></td><td><pre>:: 指定根目录，遍历子文件夹</pre></td></tr><tr><td data-num="26"></td><td><pre><span class="token keyword">for</span> <span class="token operator">/</span>d <span class="token operator">%</span><span class="token operator">%</span>d in <span class="token punctuation">(</span><span class="token string">"D:\Env\Java\*"</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token punctuation">(</span></pre></td></tr><tr><td data-num="27"></td><td><pre>    <span class="token function">set</span> <span class="token operator">/</span>a <span class="token string">"count+=1"</span></pre></td></tr><tr><td data-num="28"></td><td><pre>    <span class="token function">set</span> <span class="token string">"options=!options! !count!"</span></pre></td></tr><tr><td data-num="29"></td><td><pre>    <span class="token function">set</span> <span class="token string">"dir[!count!]=%%d"</span></pre></td></tr><tr><td data-num="30"></td><td><pre><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="31"></td><td><pre></pre></td></tr><tr><td data-num="32"></td><td><pre>::<span class="token function">echo</span> <span class="token function">Select</span> a directory:</pre></td></tr><tr><td data-num="33"></td><td><pre><span class="token keyword">for</span> <span class="token operator">%</span><span class="token operator">%</span>i in <span class="token punctuation">(</span><span class="token operator">%</span>options%<span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token punctuation">(</span></pre></td></tr><tr><td data-num="34"></td><td><pre>    <span class="token function">echo</span>          <span class="token punctuation">[</span><span class="token operator">%</span><span class="token operator">%</span>i<span class="token punctuation">]</span>  切换至版本： <span class="token operator">!</span><span class="token function">dir</span><span class="token punctuation">[</span><span class="token operator">%</span><span class="token operator">%</span>i<span class="token punctuation">]</span><span class="token operator">!</span></pre></td></tr><tr><td data-num="35"></td><td><pre><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="36"></td><td><pre><span class="token function">echo</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="37"></td><td><pre><span class="token function">echo</span> ========================================================</pre></td></tr><tr><td data-num="38"></td><td><pre><span class="token function">echo</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="39"></td><td><pre>:tipsChoose</pre></td></tr><tr><td data-num="40"></td><td><pre><span class="token function">set</span> <span class="token operator">/</span>p <span class="token string">"choice=Enter the number of your choice: "</span></pre></td></tr><tr><td data-num="41"></td><td><pre></pre></td></tr><tr><td data-num="42"></td><td><pre><span class="token keyword">if</span> <span class="token string">"%choice%"</span> EQU <span class="token string">"0"</span> <span class="token punctuation">(</span></pre></td></tr><tr><td data-num="43"></td><td><pre>       goto <span class="token keyword">exit</span></pre></td></tr><tr><td data-num="44"></td><td><pre><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token operator">%</span>choice% gtr <span class="token operator">%</span>count% <span class="token punctuation">(</span></pre></td></tr><tr><td data-num="45"></td><td><pre>    <span class="token function">echo</span> 请输入<span class="token punctuation">[</span> 0 <span class="token operator">--</span> <span class="token operator">%</span>count% <span class="token punctuation">]</span>范围内的数字</pre></td></tr><tr><td data-num="46"></td><td><pre>    <span class="token function">echo</span> 》》》</pre></td></tr><tr><td data-num="47"></td><td><pre>    goto tipsChoose</pre></td></tr><tr><td data-num="48"></td><td><pre><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="49"></td><td><pre></pre></td></tr><tr><td data-num="50"></td><td><pre><span class="token function">set</span> <span class="token string">"JAVA_HOME=!dir[%choice%]!"</span></pre></td></tr><tr><td data-num="51"></td><td><pre><span class="token keyword">if</span> <span class="token string">"!JAVA_HOME!"</span> == <span class="token string">""</span> <span class="token punctuation">(</span></pre></td></tr><tr><td data-num="52"></td><td><pre>    <span class="token function">echo</span> 获取的目录为空，请输入正确范围内的数字！</pre></td></tr><tr><td data-num="53"></td><td><pre>    goto tipsChoose</pre></td></tr><tr><td data-num="54"></td><td><pre><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="55"></td><td><pre>setx JAVA_HOME <span class="token string">"!JAVA_HOME!"</span> <span class="token operator">/</span>m</pre></td></tr><tr><td data-num="56"></td><td><pre></pre></td></tr><tr><td data-num="57"></td><td><pre><span class="token function">echo</span> JAVA_HOME 已切换至： <span class="token operator">!</span>JAVA_HOME!</pre></td></tr><tr><td data-num="58"></td><td><pre></pre></td></tr><tr><td data-num="59"></td><td><pre></pre></td></tr><tr><td data-num="60"></td><td><pre><span class="token function">echo</span> 按任意键退出<span class="token punctuation">.</span><span class="token punctuation">.</span> &amp; pause > nul</pre></td></tr><tr><td data-num="61"></td><td><pre></pre></td></tr><tr><td data-num="62"></td><td><pre>:<span class="token keyword">exit</span></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="Shell" scheme="http://xsea.cc/categories/Shell/"/>
+    
+    
+    <category term="Shell" scheme="http://xsea.cc/tags/Shell/"/>
+    
+    <category term="Windows" scheme="http://xsea.cc/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【转】此生为人，实属意外</title>
+    <link href="http://xsea.cc/2023/03/130185c4.html"/>
+    <id>http://xsea.cc/2023/03/130185c4.html</id>
+    <published>2023-03-19T05:34:39.000Z</published>
+    <updated>2023-03-22T15:33:24.854Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>[转] 此生为人，实属意外，因无经验参照，不尽仁义之处，还请多多担待！</p></blockquote><span id="more"></span><p>此生为人，实属意外。本人出身耕农之家，落地时天无异象。</p><p>父母识字略过百，茅屋三间遮身，非书香门第。</p><p>几亩瘦田刨食，得以苟活幸存，全杖上天垂青，得益母爱父恩，方能蜷缩在万丈红尘。</p><p>八年学堂混个初本，弃笔从戎，未建盖世功勋。</p><p>虽命比纸薄，心恨天高。</p><p>匍匐人间，百折不挠，隐入尘烟，偶得逍遥。</p><p>学富虽无五车，却喜舞文弄墨。</p><p>居于市井窥视庙堂，偶尔故作高深，装模作样。</p><p>人前不敢卸下伪装，人后不敢直视内心肮脏。</p><p>做好人不能由始及终，行坏事不敢彻底放纵。</p><p>贪财又恐世俗不容，好色时常胆怂。</p><p>既非混世魔王，也非盖世英雄；</p><p>见庙烧香，遇佛也拜，酒肉均沾；</p><p>放生时慈悲为怀，杀生时手起刀快，既辜负了观音，也辜负了如来。</p><p>蹉跎半生，无傲人过往可寻，展望未来，亦缺少年雄心，苟且红尘偷生，虚度年华光阴。</p><p>愧疚为人子，未能尽人之孝行，让父母安心；不安为人父，未担起父之责任，承子女欢情。</p><p>自责为人有友，未对友肝胆赤诚。空叹世间知己难寻呐。</p><p>此生为人，实属意外，因无经验参照，不尽仁义之处，还请多多担待！</p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;[转] 此生为人，实属意外，因无经验参照，不尽仁义之处，还请多多担待！&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="人生感悟" scheme="http://xsea.cc/categories/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="人生" scheme="http://xsea.cc/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【ChatGPT】给我写一首歌，关键词：love，sea</title>
+    <link href="http://xsea.cc/2023/03/27c52b84.html"/>
+    <id>http://xsea.cc/2023/03/27c52b84.html</id>
+    <published>2023-03-19T01:57:05.000Z</published>
+    <updated>2023-03-22T15:33:24.853Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>现在 ChatGPT 大火，也试着让他写一首歌试试；记录下</p></blockquote><span id="more"></span><h2 id="歌曲名海洋之恋"><a class="markdownIt-Anchor" href="#歌曲名海洋之恋">#</a> 歌曲名：海洋之恋</h2><p>(Verse 1)<br>G    D    Em  C<br> 海洋星空满天下<br> G    D    Em  C<br> 海浪声声宛如歌<br> G    D    Em  C<br> 你的眼中有无尽<br> G    D    Em  C<br> 深情永存我心坎</p><p>(Chorus)<br>G    D    Em  C<br> 爱情似海一般宽广<br> G    D    Em  C<br> 充满欢乐充满平静<br> G    D    Em  C<br> 像海浪一样不停的起伏<br> G    D    Em  C<br> 带给我们无尽的希望</p><p>(Verse 2)<br>G    D    Em  C<br> 海边散步与你相依<br> G    D    Em  C<br> 心跳声声共鸣悠长<br> G    D    Em  C<br> 沙滩上的足印纹迹<br> G    D    Em  C<br> 证明永恒的爱情绝不褪色</p><p>(Bridge)<br>Am   G    D   C<br> 有时海浪狂暴无常<br> Am   G    D   C<br> 但爱情却能镇定内心<br> Am   G    D   C<br> 当风暴来临带来变革<br> Am   G    D   C<br> 我们的爱情不变，继续成长</p><p>(Chorus)<br>G    D    Em  C<br> 爱情似海一般宽广<br> G    D    Em  C<br> 充满欢乐充满平静<br> G    D    Em  C<br> 像海浪一样不停的起伏<br> G    D    Em  C<br> 带给我们无尽的希望</p><p>(Outro)<br>G    D    Em  C<br> 海洋星空满天下<br> G    D    Em  C<br> 我们的爱情生生不息<br> G    D    Em  C<br> 你的眼中有无尽<br> G    D    Em  C<br> 深情永存我心坎</p><blockquote><p>PS:  G D Em C</p><p>这些是吉他和弦符号，用来表示在这个歌曲中需要弹奏的和弦。</p><p>具体来说，G 表示吉他上的 G 大调和弦，D 表示 D 大调和弦，Em 表示 E 小调和弦，C 表示 C 大调和弦。在这个曲谱中，吉他手需要弹奏这些和弦来伴奏歌曲。</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;现在 ChatGPT 大火，也试着让他写一首歌试试；记录下&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="人工智能" scheme="http://xsea.cc/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+    <category term="ChatGPT" scheme="http://xsea.cc/tags/ChatGPT/"/>
+    
+    <category term="AI" scheme="http://xsea.cc/tags/AI/"/>
+    
+    <category term="创作" scheme="http://xsea.cc/tags/%E5%88%9B%E4%BD%9C/"/>
+    
+    <category term="音乐" scheme="http://xsea.cc/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux/Centos 环境Shell会话关闭后，本会话启动进程被终止</title>
@@ -166,6 +244,31 @@
   </entry>
   
   <entry>
+    <title>Centos安装Maven私服Nexus3</title>
+    <link href="http://xsea.cc/2022/05/cd130dc5.html"/>
+    <id>http://xsea.cc/2022/05/cd130dc5.html</id>
+    <published>2022-05-06T05:25:30.000Z</published>
+    <updated>2023-03-22T15:33:24.853Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>记录 Centos 安装 Maven 私服 Nexus3 过程</p></blockquote><span id="more"></span><h1 id="centos-安装-maven私服-nexus3"><a class="markdownIt-Anchor" href="#centos-安装-maven私服-nexus3">#</a> Centos 安装 Maven 私服 Nexus3</h1><ol><li><p>创建 nexus 用户、设置密码</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@aly-nexus local<span class="token punctuation">]</span><span class="token comment"># adduser nexus</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@aly-nexus local<span class="token punctuation">]</span><span class="token comment"># passwd nexus</span></pre></td></tr></table></figure></li><li><p>以 nexus 用户登陆，上传 Nexus 包、解压至用户根目录</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>nexus@aly-nexus ~<span class="token punctuation">]</span>$ <span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> nexus-3.29.2-02-unix.tar.gz</pre></td></tr></table></figure></li><li><p>修改文件描述资源限制</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@aly-nexus local<span class="token punctuation">]</span><span class="token comment"># vim /etc/security/limits.conf</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#@student        -       maxlogins       4</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>*               soft    nofile           <span class="token number">65536</span></pre></td></tr><tr><td data-num="6"></td><td><pre>*               hard    nofile           <span class="token number">65536</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment"># End of file</span></pre></td></tr></table></figure></li><li><p>配置开机启动</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@aly-nexus local<span class="token punctuation">]</span><span class="token comment"># vim /etc/rc.local</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#!/bin/bash</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment"># THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token comment"># It is highly advisable to create own systemd services or udev rules</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment"># to run scripts during boot instead of using this file.</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment"># In contrast to previous versions due to parallel execution during boot</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment"># this script will NOT be run after all other services.</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token comment"># Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment"># that this script will be executed during boot.</span></pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token function">touch</span> /var/lock/subsys/local</pre></td></tr><tr><td data-num="16"></td><td><pre></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token comment"># 以 nexus 用户运行启动 nexus 服务</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token function">su</span> - nexus <span class="token parameter variable">-c</span> <span class="token string">"/home/nexus/nexus-3.29.2-02/bin/nexus start"</span></pre></td></tr></table></figure></li><li><p>以 nexus 用户登陆，手动启动服务</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>nexus@aly-nexus ~<span class="token punctuation">]</span>$ /home/nexus/nexus-3.29.2-02/bin/nexus start</pre></td></tr></table></figure></li></ol><p>启动成功后，访问地址： <span class="exturl" data-url="aHR0cDovL3huLS1pcC1mcjVjODZseDd6OjgwODE=">http:// 服务器 ip:8081</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;记录 Centos 安装 Maven 私服 Nexus3 过程&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    
+    
+    <category term="Centos" scheme="http://xsea.cc/tags/Centos/"/>
+    
+    <category term="Nexus" scheme="http://xsea.cc/tags/Nexus/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Centos7.9使用yum安装Nginx</title>
     <link href="http://xsea.cc/2022/04/eb7cc45c.html"/>
     <id>http://xsea.cc/2022/04/eb7cc45c.html</id>
@@ -186,6 +289,86 @@
     
     
     <category term="Nginx" scheme="http://xsea.cc/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Maven插件[versions-maven-plugin]</title>
+    <link href="http://xsea.cc/2022/04/fbbabe1b.html"/>
+    <id>http://xsea.cc/2022/04/fbbabe1b.html</id>
+    <published>2022-04-02T14:42:03.000Z</published>
+    <updated>2023-03-22T15:33:24.853Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>记录下 Maven 插件 [versions-maven-plugin] 的主要作用及使用方法</p></blockquote><span id="more"></span><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubW9qb2hhdXMub3JnL3ZlcnNpb25zL3ZlcnNpb25zLW1hdmVuLXBsdWdpbi9pbmRleC5odG1s">versions-maven-plugin 插件官网</span></p><h2 id="以下为本插件命令清单"><a class="markdownIt-Anchor" href="#以下为本插件命令清单">#</a> 以下为本插件命令清单</h2><p><img data-src="http://img.xhal.cc/picgo/uTools_1679495937552.png" alt="goals"></p><h2 id="maven-pomxml配置"><a class="markdownIt-Anchor" href="#maven-pomxml配置">#</a> Maven pom.xml 配置</h2><figure class="highlight xml"><figcaption data-lang="XML"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="2"></td><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.codehaus.mojo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="3"></td><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>versions-maven-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="4"></td><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.10.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="5"></td><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>reportSets</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>reportSet</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>reports</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="8"></td><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>report</span><span class="token punctuation">></span></span>dependency-updates-report<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>report</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="9"></td><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>report</span><span class="token punctuation">></span></span>plugin-updates-report<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>report</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="10"></td><td><pre>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>report</span><span class="token punctuation">></span></span>property-updates-report<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>report</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="11"></td><td><pre>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>reports</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="12"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>reportSet</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="13"></td><td><pre>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>reportSets</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">></span></span></pre></td></tr></table></figure><h2 id="常用命令"><a class="markdownIt-Anchor" href="#常用命令">#</a> 常用命令</h2><h3 id="更新项目版本为指定版本号"><a class="markdownIt-Anchor" href="#更新项目版本为指定版本号">#</a> 更新项目版本，为指定版本号</h3><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre>mvn versions:set <span class="token parameter variable">-DnewVersion</span><span class="token operator">=</span><span class="token number">1.0</span>.1-SNAPSHOT</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment"># 执行后正常会在 pom.xml 同级目录生成 pom.xml.versionsBackup 文件</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># 再使用确认提交命令，会清除 生成的 pom.xml.versionsBackup 文件</span></pre></td></tr><tr><td data-num="6"></td><td><pre>mvn versions:commit</pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># 如果想还原 pom.xml ，则执行以下命令 </span></pre></td></tr><tr><td data-num="9"></td><td><pre>mvn versions:revert</pre></td></tr></table></figure><h3 id="更新依赖jar-为-下一个-releases-版本"><a class="markdownIt-Anchor" href="#更新依赖jar-为-下一个-releases-版本">#</a> 更新依赖 Jar 为 下一个 releases 版本</h3><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre>mvn versions:use-next-releases <span class="token parameter variable">-T1C</span></pre></td></tr></table></figure><h3 id="更新依赖jar-为-最新的-releases-版本"><a class="markdownIt-Anchor" href="#更新依赖jar-为-最新的-releases-版本">#</a> 更新依赖 Jar 为 最新的 releases 版本</h3><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre>mvn versions:use-latest-releases <span class="token parameter variable">-T1C</span></pre></td></tr></table></figure><h3 id="更新下载依赖的-源码包javadoc包"><a class="markdownIt-Anchor" href="#更新下载依赖的-源码包javadoc包">#</a> 更新下载依赖的 源码包 / JavaDoc 包</h3><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre>mvn dependency:sources <span class="token parameter variable">-DdownloadSources</span><span class="token operator">=</span>true <span class="token parameter variable">-DdownloadJavadocs</span><span class="token operator">=</span>true <span class="token parameter variable">-T1C</span></pre></td></tr></table></figure><h3 id="显示可更新版本的-maven-插件"><a class="markdownIt-Anchor" href="#显示可更新版本的-maven-插件">#</a> 显示可更新版本的 maven 插件</h3><figure class="highlight sh"><figcaption data-lang="sh"></figcaption><table><tr><td data-num="1"></td><td><pre>mvn versions:display-plugin-updates <span class="token parameter variable">-T1C</span></pre></td></tr></table></figure><p>PS: 更多使用方法，请访问 <span class="exturl" data-url="aHR0cHM6Ly93d3cubW9qb2hhdXMub3JnL3ZlcnNpb25zL3ZlcnNpb25zLW1hdmVuLXBsdWdpbi91c2FnZS5odG1s">官网使用示例</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;记录下 Maven 插件 [versions-maven-plugin] 的主要作用及使用方法&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Maven" scheme="http://xsea.cc/categories/Maven/"/>
+    
+    
+    <category term="Maven" scheme="http://xsea.cc/tags/Maven/"/>
+    
+    <category term="插件" scheme="http://xsea.cc/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos安装Tengine</title>
+    <link href="http://xsea.cc/2022/03/cca36461.html"/>
+    <id>http://xsea.cc/2022/03/cca36461.html</id>
+    <published>2022-03-22T15:14:56.000Z</published>
+    <updated>2023-03-22T15:33:24.853Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="centos-安装-tengine"><a class="markdownIt-Anchor" href="#centos-安装-tengine">#</a> Centos 安装 Tengine</h1><blockquote><p>记录下源码安装 Tengine 过程记录</p></blockquote><ol><li><p>下载及解压包</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">## 进入 /usr/local/ 目录</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun home<span class="token punctuation">]</span><span class="token comment"># cd /usr/local/</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">## 下载源码包</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun local<span class="token punctuation">]</span><span class="token comment"># wget http://tengine.taobao.org/download/tengine-2.3.2.tar.gz</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment">## 解压</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun local<span class="token punctuation">]</span><span class="token comment"># tar -zxvf tengine-2.3.2.tar.gz</span></pre></td></tr></table></figure></li><li><p>cd 切换到 Tengine 解压目录</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun local<span class="token punctuation">]</span><span class="token comment"># cd tengine-2.3.2/</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun tengine-2.3.2<span class="token punctuation">]</span><span class="token comment">#</span></pre></td></tr></table></figure></li><li><p>配置安装，包含健康检查 check 模块 (默认安装目录  <code> /usr/local/nginx</code> )</p></li></ol><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun tengine-2.3.2<span class="token punctuation">]</span><span class="token comment"># ./configure --add-module=modules/ngx_http_upstream_check_module</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun tengine-2.3.2<span class="token punctuation">]</span><span class="token comment"># make</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun tengine-2.3.2<span class="token punctuation">]</span><span class="token comment"># make install</span></pre></td></tr></table></figure><ol start="4"><li><p>开机启动</p><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@ss-aliyun local<span class="token punctuation">]</span><span class="token comment"># vim /etc/rc.local</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#!/bin/bash</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment"># THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token comment"># It is highly advisable to create own systemd services or udev rules</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment"># to run scripts during boot instead of using this file.</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment"># In contrast to previous versions due to parallel execution during boot</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment"># this script will NOT be run after all other services.</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token comment">#</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token comment"># Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment"># that this script will be executed during boot.</span></pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token function">touch</span> /var/lock/subsys/local</pre></td></tr><tr><td data-num="16"></td><td><pre></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token comment"># 启动 nginx 服务</span></pre></td></tr><tr><td data-num="18"></td><td><pre>/usr/local/nginx/sbin/nginx</pre></td></tr></table></figure></li><li><p>配置 nginx.conf</p></li></ol><p>PS: 此处删除了 默认 80 端口 静态 html 配置，若需要则在拓展  <code>vhost/</code>  目录下自己添加配置</p><pre><code class="language-config">#user  nobody;worker_processes  auto;#error_log  logs/error.log;#error_log  logs/error.log  notice;#error_log  logs/error.log  info;#error_log  &quot;pipe:rollback logs/error_log interval=1d baknum=7 maxsize=2G&quot;;#pid        logs/nginx.pid;events &#123;    worker_connections  1024;&#125;http &#123;    include       mime.types;    default_type  application/octet-stream;    charset utf-8;    #log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '    #                  '$status $body_bytes_sent &quot;$http_referer&quot; '    #                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';    #access_log  logs/access.log  main;    #access_log  &quot;pipe:rollback logs/access_log interval=1d baknum=7 maxsize=2G&quot;  main;    log_format xformat '$time_local - [$scheme $host] $remote_addr[$request] $status $body_bytes_sent '                      '$upstream_addr - $upstream_response_time';    access_log  logs/access.log xformat;    sendfile        on;    #tcp_nopush     on;    #keepalive_timeout  0;    keepalive_timeout  65;    gzip  on;    include ./vhost/*.conf;        #upstream dubbo_backend &#123;    #    multi 1;    #    server 127.0.0.1:20880;    #&#125;    # another virtual host using mix of IP-, name-, and port-based configuration    #    #server &#123;    #    listen       8000;    #    listen       somename:8080;    #    server_name  somename  alias  another.alias;    #    location / &#123;    #        root   html;    #        index  index.html index.htm;    #    &#125;    #&#125;    # HTTPS server    #    #server &#123;    #    listen       443 ssl;    #    server_name  localhost;    #    ssl_certificate      cert.pem;    #    ssl_certificate_key  cert.key;    #    ssl_session_cache    shared:SSL:2m;    #    ssl_session_timeout  4h;    #    ssl_ciphers  HIGH:!aNULL:!MD5;    #    ssl_prefer_server_ciphers  on;    #    location / &#123;    #        root   html;    #        index  index.html index.htm;    #    &#125;    #&#125;&#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    
+    
+    <category term="Nginx" scheme="http://xsea.cc/tags/Nginx/"/>
+    
+    <category term="Centos" scheme="http://xsea.cc/tags/Centos/"/>
+    
+    <category term="Tengine" scheme="http://xsea.cc/tags/Tengine/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos使用yum常用命令</title>
+    <link href="http://xsea.cc/2022/03/29184805.html"/>
+    <id>http://xsea.cc/2022/03/29184805.html</id>
+    <published>2022-03-12T14:21:38.000Z</published>
+    <updated>2023-03-22T15:33:24.852Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>在部署过程中，经常要使用 yum 命令安装些组件； 记录下常用的命令参数</p></blockquote><span id="more"></span><h3 id="清理缓存信息"><a class="markdownIt-Anchor" href="#清理缓存信息">#</a> 清理缓存信息</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum clean all</pre></td></tr></table></figure><h3 id="更新缓存"><a class="markdownIt-Anchor" href="#更新缓存">#</a> 更新缓存</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum makecache</pre></td></tr></table></figure><h3 id="安装包最新版本"><a class="markdownIt-Anchor" href="#安装包最新版本">#</a> 安装包 (最新版本)</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum <span class="token function">install</span> 包名（例如： redis）</pre></td></tr></table></figure><h3 id="安装包指定版本"><a class="markdownIt-Anchor" href="#安装包指定版本">#</a> 安装包 (指定版本)</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum <span class="token function">install</span> 带版本包名（例如： redis-5.1.2.x86_x64）</pre></td></tr></table></figure><h3 id="仅下载不安装"><a class="markdownIt-Anchor" href="#仅下载不安装">#</a> 仅下载（不安装）</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum <span class="token function">install</span> <span class="token parameter variable">--downloadonly</span> 包名（例如： redis）</pre></td></tr></table></figure><blockquote><p>默认情况下，下载的 RPM 包文件存放在以下目录<br> /var/cache/yum/x86_64/[system version]/[repository]/packages</p></blockquote><h3 id="查找指定包"><a class="markdownIt-Anchor" href="#查找指定包">#</a> 查找指定包</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum list<span class="token operator">|</span><span class="token function">grep</span> 包名或关键字（例如： redis）</pre></td></tr></table></figure><h3 id="卸载指定包"><a class="markdownIt-Anchor" href="#卸载指定包">#</a> 卸载指定包</h3><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum remove 包名（例如： redis）</pre></td></tr></table></figure><figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">rpm</span> <span class="token parameter variable">-e</span> 包名（例如： redis）</pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;在部署过程中，经常要使用 yum 命令安装些组件； 记录下常用的命令参数&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="运维部署" scheme="http://xsea.cc/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/"/>
+    
+    
+    <category term="Linux" scheme="http://xsea.cc/tags/Linux/"/>
+    
+    <category term="Centos" scheme="http://xsea.cc/tags/Centos/"/>
+    
+    <category term="Yum" scheme="http://xsea.cc/tags/Yum/"/>
     
   </entry>
   

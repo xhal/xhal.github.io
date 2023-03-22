@@ -15,6 +15,17 @@
         <category>Shell</category>
         <category>古代</category>
         <category>名言</category>
+        <category>Yum</category>
+        <category>Nexus</category>
+        <category>Tengine</category>
+        <category>Maven</category>
+        <category>插件</category>
+        <category>ChatGPT</category>
+        <category>AI</category>
+        <category>创作</category>
+        <category>音乐</category>
+        <category>人生</category>
+        <category>Windows</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2023/01/dacefe23.html</guid>
             <title>Redis7 源码安装</title>

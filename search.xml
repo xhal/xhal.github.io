@@ -261,4 +261,349 @@ https://www.cnblogs.com/byzgss/p/15573344.html
         <tag>名言</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Centos使用yum常用命令</title>
+    <url>/2022/03/29184805.html</url>
+    <content><![CDATA[
+在部署过程中，经常要使用 yum 命令安装些组件； 记录下常用的命令参数
+
+
+# 清理缓存信息
+yum clean all# 更新缓存
+yum makecache# 安装包 (最新版本)
+yum install 包名（例如： redis）# 安装包 (指定版本)
+yum install 带版本包名（例如： redis-5.1.2.x86_x64）# 仅下载（不安装）
+yum install --downloadonly 包名（例如： redis）
+默认情况下，下载的 RPM 包文件存放在以下目录
+ /var/cache/yum/x86_64/[system version]/[repository]/packages
+
+# 查找指定包
+yum list|grep 包名或关键字（例如： redis）# 卸载指定包
+yum remove 包名（例如： redis）rpm -e 包名（例如： redis）]]></content>
+      <categories>
+        <category>运维部署</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Centos</tag>
+        <tag>Yum</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centos安装Maven私服Nexus3</title>
+    <url>/2022/05/cd130dc5.html</url>
+    <content><![CDATA[
+记录 Centos 安装 Maven 私服 Nexus3 过程
+
+
+# Centos 安装 Maven 私服 Nexus3
+
+
+创建 nexus 用户、设置密码
+[root@aly-nexus local]# adduser nexus[root@aly-nexus local]# passwd nexus
+
+以 nexus 用户登陆，上传 Nexus 包、解压至用户根目录
+[nexus@aly-nexus ~]$ tar -zxvf nexus-3.29.2-02-unix.tar.gz
+
+修改文件描述资源限制
+[root@aly-nexus local]# vim /etc/security/limits.conf#@student        -       maxlogins       4*               soft    nofile           65536*               hard    nofile           65536# End of file
+
+配置开机启动
+[root@aly-nexus local]# vim /etc/rc.local#!/bin/bash# THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES## It is highly advisable to create own systemd services or udev rules# to run scripts during boot instead of using this file.## In contrast to previous versions due to parallel execution during boot# this script will NOT be run after all other services.## Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure# that this script will be executed during boot.touch /var/lock/subsys/local# 以 nexus 用户运行启动 nexus 服务su - nexus -c "/home/nexus/nexus-3.29.2-02/bin/nexus start"
+
+以 nexus 用户登陆，手动启动服务
+[nexus@aly-nexus ~]$ /home/nexus/nexus-3.29.2-02/bin/nexus start
+
+启动成功后，访问地址： http:// 服务器 ip:8081
+]]></content>
+      <categories>
+        <category>运维部署</category>
+      </categories>
+      <tags>
+        <tag>Centos</tag>
+        <tag>Nexus</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Centos安装Tengine</title>
+    <url>/2022/03/cca36461.html</url>
+    <content><![CDATA[# Centos 安装 Tengine
+
+记录下源码安装 Tengine 过程记录
+
+
+
+下载及解压包
+## 进入 /usr/local/ 目录[root@ss-aliyun home]# cd /usr/local/## 下载源码包[root@ss-aliyun local]# wget http://tengine.taobao.org/download/tengine-2.3.2.tar.gz## 解压[root@ss-aliyun local]# tar -zxvf tengine-2.3.2.tar.gz
+
+cd 切换到 Tengine 解压目录
+[root@ss-aliyun local]# cd tengine-2.3.2/[root@ss-aliyun tengine-2.3.2]#
+
+配置安装，包含健康检查 check 模块 (默认安装目录   /usr/local/nginx )
+
+
+[root@ss-aliyun tengine-2.3.2]# ./configure --add-module=modules/ngx_http_upstream_check_module[root@ss-aliyun tengine-2.3.2]# make[root@ss-aliyun tengine-2.3.2]# make install
+
+开机启动
+[root@ss-aliyun local]# vim /etc/rc.local#!/bin/bash# THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES## It is highly advisable to create own systemd services or udev rules# to run scripts during boot instead of using this file.## In contrast to previous versions due to parallel execution during boot# this script will NOT be run after all other services.## Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure# that this script will be executed during boot.touch /var/lock/subsys/local# 启动 nginx 服务/usr/local/nginx/sbin/nginx
+
+配置 nginx.conf
+
+
+PS: 此处删除了 默认 80 端口 静态 html 配置，若需要则在拓展  vhost/  目录下自己添加配置
+#user  nobody;
+worker_processes  auto;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+#error_log  &quot;pipe:rollback logs/error_log interval=1d baknum=7 maxsize=2G&quot;;
+
+#pid        logs/nginx.pid;
+
+
+events &#123;
+    worker_connections  1024;
+&#125;
+
+
+http &#123;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    charset utf-8;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+    #                  '$status $body_bytes_sent &quot;$http_referer&quot; '
+    #                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    #access_log  logs/access.log  main;
+    #access_log  &quot;pipe:rollback logs/access_log interval=1d baknum=7 maxsize=2G&quot;  main;
+
+    log_format xformat '$time_local - [$scheme $host] $remote_addr[$request] $status $body_bytes_sent '
+                      '$upstream_addr - $upstream_response_time';
+    access_log  logs/access.log xformat;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    gzip  on;
+
+    include ./vhost/*.conf;
+    
+    #upstream dubbo_backend &#123;
+    #    multi 1;
+    #    server 127.0.0.1:20880;
+    #&#125;
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server &#123;
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / &#123;
+    #        root   html;
+    #        index  index.html index.htm;
+    #    &#125;
+    #&#125;
+
+
+    # HTTPS server
+    #
+    #server &#123;
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:2m;
+    #    ssl_session_timeout  4h;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / &#123;
+    #        root   html;
+    #        index  index.html index.htm;
+    #    &#125;
+    #&#125;
+&#125;
+
+]]></content>
+      <categories>
+        <category>运维部署</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>Centos</tag>
+        <tag>Tengine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven插件[versions-maven-plugin]</title>
+    <url>/2022/04/fbbabe1b.html</url>
+    <content><![CDATA[
+记录下 Maven 插件 [versions-maven-plugin] 的主要作用及使用方法
+
+
+versions-maven-plugin 插件官网
+# 以下为本插件命令清单
+
+# Maven pom.xml 配置
+&lt;plugin>  &lt;groupId>org.codehaus.mojo&lt;/groupId>  &lt;artifactId>versions-maven-plugin&lt;/artifactId>  &lt;version>2.10.0&lt;/version>  &lt;reportSets>    &lt;reportSet>      &lt;reports>        &lt;report>dependency-updates-report&lt;/report>        &lt;report>plugin-updates-report&lt;/report>        &lt;report>property-updates-report&lt;/report>      &lt;/reports>    &lt;/reportSet>  &lt;/reportSets>&lt;/plugin># 常用命令
+# 更新项目版本，为指定版本号
+mvn versions:set -DnewVersion=1.0.1-SNAPSHOT# 执行后正常会在 pom.xml 同级目录生成 pom.xml.versionsBackup 文件# 再使用确认提交命令，会清除 生成的 pom.xml.versionsBackup 文件mvn versions:commit# 如果想还原 pom.xml ，则执行以下命令 mvn versions:revert# 更新依赖 Jar 为 下一个 releases 版本
+mvn versions:use-next-releases -T1C# 更新依赖 Jar 为 最新的 releases 版本
+mvn versions:use-latest-releases -T1C# 更新下载依赖的 源码包 / JavaDoc 包
+mvn dependency:sources -DdownloadSources=true -DdownloadJavadocs=true -T1C# 显示可更新版本的 maven 插件
+mvn versions:display-plugin-updates -T1CPS: 更多使用方法，请访问 官网使用示例
+]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
+        <tag>插件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【ChatGPT】给我写一首歌，关键词：love，sea</title>
+    <url>/2023/03/27c52b84.html</url>
+    <content><![CDATA[
+现在 ChatGPT 大火，也试着让他写一首歌试试；记录下
+
+
+# 歌曲名：海洋之恋
+(Verse 1)
+G    D    Em  C
+ 海洋星空满天下
+ G    D    Em  C
+ 海浪声声宛如歌
+ G    D    Em  C
+ 你的眼中有无尽
+ G    D    Em  C
+ 深情永存我心坎
+(Chorus)
+G    D    Em  C
+ 爱情似海一般宽广
+ G    D    Em  C
+ 充满欢乐充满平静
+ G    D    Em  C
+ 像海浪一样不停的起伏
+ G    D    Em  C
+ 带给我们无尽的希望
+(Verse 2)
+G    D    Em  C
+ 海边散步与你相依
+ G    D    Em  C
+ 心跳声声共鸣悠长
+ G    D    Em  C
+ 沙滩上的足印纹迹
+ G    D    Em  C
+ 证明永恒的爱情绝不褪色
+(Bridge)
+Am   G    D   C
+ 有时海浪狂暴无常
+ Am   G    D   C
+ 但爱情却能镇定内心
+ Am   G    D   C
+ 当风暴来临带来变革
+ Am   G    D   C
+ 我们的爱情不变，继续成长
+(Chorus)
+G    D    Em  C
+ 爱情似海一般宽广
+ G    D    Em  C
+ 充满欢乐充满平静
+ G    D    Em  C
+ 像海浪一样不停的起伏
+ G    D    Em  C
+ 带给我们无尽的希望
+(Outro)
+G    D    Em  C
+ 海洋星空满天下
+ G    D    Em  C
+ 我们的爱情生生不息
+ G    D    Em  C
+ 你的眼中有无尽
+ G    D    Em  C
+ 深情永存我心坎
+
+PS:  G D Em C
+这些是吉他和弦符号，用来表示在这个歌曲中需要弹奏的和弦。
+具体来说，G 表示吉他上的 G 大调和弦，D 表示 D 大调和弦，Em 表示 E 小调和弦，C 表示 C 大调和弦。在这个曲谱中，吉他手需要弹奏这些和弦来伴奏歌曲。
+
+]]></content>
+      <categories>
+        <category>人工智能</category>
+      </categories>
+      <tags>
+        <tag>ChatGPT</tag>
+        <tag>AI</tag>
+        <tag>创作</tag>
+        <tag>音乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【转】此生为人，实属意外</title>
+    <url>/2023/03/130185c4.html</url>
+    <content><![CDATA[
+[转] 此生为人，实属意外，因无经验参照，不尽仁义之处，还请多多担待！
+
+
+此生为人，实属意外。本人出身耕农之家，落地时天无异象。
+父母识字略过百，茅屋三间遮身，非书香门第。
+几亩瘦田刨食，得以苟活幸存，全杖上天垂青，得益母爱父恩，方能蜷缩在万丈红尘。
+八年学堂混个初本，弃笔从戎，未建盖世功勋。
+虽命比纸薄，心恨天高。
+匍匐人间，百折不挠，隐入尘烟，偶得逍遥。
+学富虽无五车，却喜舞文弄墨。
+居于市井窥视庙堂，偶尔故作高深，装模作样。
+人前不敢卸下伪装，人后不敢直视内心肮脏。
+做好人不能由始及终，行坏事不敢彻底放纵。
+贪财又恐世俗不容，好色时常胆怂。
+既非混世魔王，也非盖世英雄；
+见庙烧香，遇佛也拜，酒肉均沾；
+放生时慈悲为怀，杀生时手起刀快，既辜负了观音，也辜负了如来。
+蹉跎半生，无傲人过往可寻，展望未来，亦缺少年雄心，苟且红尘偷生，虚度年华光阴。
+愧疚为人子，未能尽人之孝行，让父母安心；不安为人父，未担起父之责任，承子女欢情。
+自责为人有友，未对友肝胆赤诚。空叹世间知己难寻呐。
+此生为人，实属意外，因无经验参照，不尽仁义之处，还请多多担待！
+]]></content>
+      <categories>
+        <category>人生感悟</category>
+      </categories>
+      <tags>
+        <tag>人生</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows切换JDK版本（Bat脚本）</title>
+    <url>/2023/03/1e014c62.html</url>
+    <content><![CDATA[
+当我们系统中有多个 JDK 版本时，要切换时每次都要手动修改：
+右键打开我的电脑 &gt;&gt; 属性 &gt;&gt; 系统高级设置 &gt;&gt; 环境变量， 修改 JAVA_HOME 的值
+非常麻烦，所以写个脚本，一键搞定；
+
+先来看看效果：
+
+我们将 JDK 统一放置在同一个目录下，比如  D:\Env\Java
+脚本简单实现逻辑，就是将这指定目录下，所有子目录都找出来，并按顺序生成编号
+脚本根据用户输入的编号对应的目录，更新环境变量  JAVA_HOME
+脚本内容如下 (特别注意： 使用 GBK 编码保存脚本文件，否则会中文乱码)：
+@echo off:: 获取管理员执行权限%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&amp;&amp;exitcd /d "%~dp0":: 设置容器大小 及 标题mode con cols=120 lines=30title JDK-Version change script of Batsetlocal EnableDelayedExpansion:menuecho 当前 JDK 版本:echo --------------------------------------------------------java -versionecho.echo.echo ========================================================echo ################ JDK 版本切换，可选操作 ################echo.echo          [0]  取消切换set "options="set "count=0":: 指定根目录，遍历子文件夹for /d %%d in ("D:\Env\Java\*") do (    set /a "count+=1"    set "options=!options! !count!"    set "dir[!count!]=%%d")::echo Select a directory:for %%i in (%options%) do (    echo          [%%i]  切换至版本： !dir[%%i]!)echo.echo ========================================================echo.:tipsChooseset /p "choice=Enter the number of your choice: "if "%choice%" EQU "0" (       goto exit) else if %choice% gtr %count% (    echo 请输入[ 0 -- %count% ]范围内的数字    echo 》》》    goto tipsChoose)set "JAVA_HOME=!dir[%choice%]!"if "!JAVA_HOME!" == "" (    echo 获取的目录为空，请输入正确范围内的数字！    goto tipsChoose)setx JAVA_HOME "!JAVA_HOME!" /mecho JAVA_HOME 已切换至： !JAVA_HOME!echo 按任意键退出.. &amp; pause > nul:exit]]></content>
+      <categories>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>

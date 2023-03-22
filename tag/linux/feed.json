@@ -15,6 +15,18 @@
                 "Centos",
                 "Shell"
             ]
+        },
+        {
+            "id": "http://xsea.cc/2022/03/29184805.html",
+            "url": "http://xsea.cc/2022/03/29184805.html",
+            "title": "Centos使用yum常用命令",
+            "date_published": "2022-03-12T14:21:38.000Z",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"/assets/css/APlayer.min.css\"><script src=\"/assets/js/APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><blockquote>\n<p>在部署过程中，经常要使用 yum 命令安装些组件； 记录下常用的命令参数</p>\n</blockquote>\n<span id=\"more\"></span>\n<h3 id=\"清理缓存信息\"><a class=\"markdownIt-Anchor\" href=\"#清理缓存信息\">#</a> 清理缓存信息</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum clean all</pre></td></tr></table></figure><h3 id=\"更新缓存\"><a class=\"markdownIt-Anchor\" href=\"#更新缓存\">#</a> 更新缓存</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum makecache</pre></td></tr></table></figure><h3 id=\"安装包最新版本\"><a class=\"markdownIt-Anchor\" href=\"#安装包最新版本\">#</a> 安装包 (最新版本)</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum <span class=\"token function\">install</span> 包名（例如： redis）</pre></td></tr></table></figure><h3 id=\"安装包指定版本\"><a class=\"markdownIt-Anchor\" href=\"#安装包指定版本\">#</a> 安装包 (指定版本)</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum <span class=\"token function\">install</span> 带版本包名（例如： redis-5.1.2.x86_x64）</pre></td></tr></table></figure><h3 id=\"仅下载不安装\"><a class=\"markdownIt-Anchor\" href=\"#仅下载不安装\">#</a> 仅下载（不安装）</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum <span class=\"token function\">install</span> <span class=\"token parameter variable\">--downloadonly</span> 包名（例如： redis）</pre></td></tr></table></figure><blockquote>\n<p>默认情况下，下载的 RPM 包文件存放在以下目录<br>\n /var/cache/yum/x86_64/[system version]/[repository]/packages</p>\n</blockquote>\n<h3 id=\"查找指定包\"><a class=\"markdownIt-Anchor\" href=\"#查找指定包\">#</a> 查找指定包</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum list<span class=\"token operator\">|</span><span class=\"token function\">grep</span> 包名或关键字（例如： redis）</pre></td></tr></table></figure><h3 id=\"卸载指定包\"><a class=\"markdownIt-Anchor\" href=\"#卸载指定包\">#</a> 卸载指定包</h3>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>yum remove 包名（例如： redis）</pre></td></tr></table></figure><figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">rpm</span> <span class=\"token parameter variable\">-e</span> 包名（例如： redis）</pre></td></tr></table></figure>",
+            "tags": [
+                "Linux",
+                "Centos",
+                "Yum"
+            ]
         }
     ]
 }
