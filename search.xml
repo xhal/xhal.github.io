@@ -606,4 +606,112 @@ PS:  G D Em C
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>CentOS7源码安装PostgreSQL15</title>
+    <url>/2022/12/54208668.html</url>
+    <content><![CDATA[
+# CentOS 7 源码安装 PostgreSQL
+# 环境信息
+
+系统版本： CentOS 7.9.2009 x86_64
+PostgreSQL 版本号：15.0
+
+# 资源准备
+
+PostgreSQL 官网下载 url: https://ftp.postgresql.org/pub/source/v15.0/postgresql-15.0.tar.gz
+
+[root@VM-20-8-centos downloads]# wget https://ftp.postgresql.org/pub/source/v15.0/postgresql-15.0.tar.gz# 环境准备
+# 安装必要组件[root@VM-20-8-centos downloads]# yum -y install gcc gcc-c++ readline-devel zlib-devel# 安装步骤
+
+解压下载的压缩包
+
+[root@VM-20-8-centos downloads]# tar -zxf postgresql-15.0.tar.gz [root@VM-20-8-centos downloads]# lldrwxrwxrwx 6 1107 1107     4096 Oct 11 05:01 postgresql-15.0-rw-r--r-- 1 root root 29385837 Oct 11 05:01 postgresql-15.0.tar.gz# 进入解压目录，使用 ./configure 编译[root@VM-20-8-centos downloads]# cd postgresql-15.0/[root@VM-20-8-centos postgresql-15.0]# ./configure...... 以上省略N行configure: using compiler=gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)configure: using CFLAGS=-Wall -Wmissing-prototypes -Wpointer-arith -Wdeclaration-after-statement -Werror=vla -Wendif-labels -Wmissing-format-attribute -Wformat-security -fno-strict-aliasing -fwrapv -fexcess-precision=standard -O2configure: using CPPFLAGS= -D_GNU_SOURCE configure: using LDFLAGS=  -Wl,--as-neededconfigure: creating ./config.statusconfig.status: creating GNUmakefileconfig.status: creating src/Makefile.globalconfig.status: creating src/include/pg_config.hconfig.status: creating src/include/pg_config_ext.hconfig.status: creating src/interfaces/ecpg/include/ecpg_config.hconfig.status: linking src/backend/port/tas/dummy.s to src/backend/port/tas.sconfig.status: linking src/backend/port/posix_sema.c to src/backend/port/pg_sema.cconfig.status: linking src/backend/port/sysv_shmem.c to src/backend/port/pg_shmem.cconfig.status: linking src/include/port/linux.h to src/include/pg_config_os.hconfig.status: linking src/makefiles/Makefile.linux to src/Makefile.port
+执行安装命令
+
+[root@VM-20-8-centos postgresql-15.0]# make &amp;&amp; make install...... 以上省略N行make[1]: Leaving directory `/home/downloads/postgresql-15.0/src'make -C config installmake[1]: Entering directory `/home/downloads/postgresql-15.0/config'/usr/bin/mkdir -p '/usr/local/pgsql/lib/pgxs/config'/usr/bin/install -c -m 755 ./install-sh '/usr/local/pgsql/lib/pgxs/config/install-sh'/usr/bin/install -c -m 755 ./missing '/usr/local/pgsql/lib/pgxs/config/missing'make[1]: Leaving directory `/home/downloads/postgresql-15.0/config'[root@VM-20-8-centos postgresql-15.0]#以上命令执行成功后，默认会创建目录  /usr/local/pgsql
+[root@VM-20-8-centos postgresql-15.0]# cd /usr/local/pgsql/[root@VM-20-8-centos pgsql]# lltotal 16drwxr-xr-x 2 root root 4096 Oct 13 22:50 bindrwxr-xr-x 6 root root 4096 Oct 13 22:50 includedrwxr-xr-x 4 root root 4096 Oct 13 22:50 libdrwxr-xr-x 6 root root 4096 Oct 13 22:50 share
+创建系统用户、配置权限（以上操作如果是 root 用户执行，否则跳过此步骤）
+
+# 添加用户[root@VM-20-8-centos pgsql]# useradd postgres# 设置密码 （特别注意： 如果是外网环境，千万不要设置简单的密码或甚至同账号，否则很容易被黑客攻破）[root@VM-20-8-centos pgsql]# echo 'post@gres@qw_231' | passwd --stdin postgresChanging password for user postgres.passwd: all authentication tokens updated successfully.# 目录授权给新建用户 postgres[root@VM-20-8-centos pgsql]# cd ..[root@VM-20-8-centos local]# chown -R postgres:postgres pgsql/[root@VM-20-8-centos local]# cd pgsql/[root@VM-20-8-centos pgsql]# lltotal 16drwxr-xr-x 2 postgres postgres 4096 Oct 13 22:50 bindrwxr-xr-x 6 postgres postgres 4096 Oct 13 22:50 includedrwxr-xr-x 4 postgres postgres 4096 Oct 13 22:50 libdrwxr-xr-x 6 postgres postgres 4096 Oct 13 22:50 share
+初始化数据库
+
+# 进入 bin 目录，查看可用 命令[root@VM-20-8-centos pgsql]# cd bin/[root@VM-20-8-centos bin]# lltotal 13732-rwxr-xr-x 1 postgres postgres   83936 Oct 13 22:50 clusterdb-rwxr-xr-x 1 postgres postgres   88264 Oct 13 22:50 createdb-rwxr-xr-x 1 postgres postgres   88464 Oct 13 22:50 createuser-rwxr-xr-x 1 postgres postgres   79152 Oct 13 22:50 dropdb-rwxr-xr-x 1 postgres postgres   79096 Oct 13 22:50 dropuser-rwxr-xr-x 1 postgres postgres 1013232 Oct 13 22:50 ecpg-rwxr-xr-x 1 postgres postgres  148752 Oct 13 22:50 initdb-rwxr-xr-x 1 postgres postgres  115192 Oct 13 22:50 pg_amcheck-rwxr-xr-x 1 postgres postgres   48640 Oct 13 22:50 pg_archivecleanup-rwxr-xr-x 1 postgres postgres  156904 Oct 13 22:50 pg_basebackup-rwxr-xr-x 1 postgres postgres  207232 Oct 13 22:50 pgbench-rwxr-xr-x 1 postgres postgres   67624 Oct 13 22:50 pg_checksums-rwxr-xr-x 1 postgres postgres   47088 Oct 13 22:50 pg_config-rwxr-xr-x 1 postgres postgres   61616 Oct 13 22:50 pg_controldata-rwxr-xr-x 1 postgres postgres   77256 Oct 13 22:50 pg_ctl-rwxr-xr-x 1 postgres postgres  408376 Oct 13 22:50 pg_dump-rwxr-xr-x 1 postgres postgres  115840 Oct 13 22:50 pg_dumpall-rwxr-xr-x 1 postgres postgres   78712 Oct 13 22:50 pg_isready-rwxr-xr-x 1 postgres postgres  103552 Oct 13 22:50 pg_receivewal-rwxr-xr-x 1 postgres postgres  103792 Oct 13 22:50 pg_recvlogical-rwxr-xr-x 1 postgres postgres   71760 Oct 13 22:50 pg_resetwal-rwxr-xr-x 1 postgres postgres  193768 Oct 13 22:50 pg_restore-rwxr-xr-x 1 postgres postgres  152224 Oct 13 22:50 pg_rewind-rwxr-xr-x 1 postgres postgres   54064 Oct 13 22:50 pg_test_fsync-rwxr-xr-x 1 postgres postgres   43336 Oct 13 22:50 pg_test_timing-rwxr-xr-x 1 postgres postgres  167208 Oct 13 22:50 pg_upgrade-rwxr-xr-x 1 postgres postgres  123584 Oct 13 22:50 pg_verifybackup-rwxr-xr-x 1 postgres postgres  118088 Oct 13 22:50 pg_waldump-rwxr-xr-x 1 postgres postgres 9006040 Oct 13 22:50 postgreslrwxrwxrwx 1 postgres postgres       8 Oct 13 22:50 postmaster -> postgres-rwxr-xr-x 1 postgres postgres  699088 Oct 13 22:50 psql-rwxr-xr-x 1 postgres postgres   93152 Oct 13 22:50 reindexdb-rwxr-xr-x 1 postgres postgres   97472 Oct 13 22:50 vacuumdb# 查看 初始化 db help[root@VM-20-8-centos bin]# ./initdb --helpinitdb initializes a PostgreSQL database cluster.Usage:  initdb [OPTION]... [DATADIR]Options:  -A, --auth=METHOD         default authentication method for local connections      --auth-host=METHOD    default authentication method for local TCP/IP connections      --auth-local=METHOD   default authentication method for local-socket connections [-D, --pgdata=]DATADIR     location for this database cluster  -E, --encoding=ENCODING   set default encoding for new databases  -g, --allow-group-access  allow group read/execute on data directory      --icu-locale=LOCALE   set ICU locale ID for new databases  -k, --data-checksums      use data page checksums      --locale=LOCALE       set default locale for new databases      --lc-collate=, --lc-ctype=, --lc-messages=LOCALE      --lc-monetary=, --lc-numeric=, --lc-time=LOCALE                            set default locale in the respective category for                            new databases (default taken from environment)      --no-locale           equivalent to --locale=C      --locale-provider=&#123;libc|icu&#125;                            set default locale provider for new databases      --pwfile=FILE         read password for the new superuser from file  -T, --text-search-config=CFG                            default text search configuration  -U, --username=NAME       database superuser name  -W, --pwprompt            prompt for a password for the new superuser  -X, --waldir=WALDIR       location for the write-ahead log directory      --wal-segsize=SIZE    size of WAL segments, in megabytesLess commonly used options:  -d, --debug               generate lots of debugging output      --discard-caches      set debug_discard_caches=1  -L DIRECTORY              where to find the input files  -n, --no-clean            do not clean up after errors  -N, --no-sync             do not wait for changes to be written safely to disk      --no-instructions     do not print instructions for next steps  -s, --show                show internal settings  -S, --sync-only           only sync database files to disk, then exitOther options:  -V, --version             output version information, then exit  -?, --help                show this help, then exitIf the data directory is not specified, the environment variable PGDATAis used.Report bugs to &lt;pgsql-bugs@lists.postgresql.org>.PostgreSQL home page: &lt;https://www.postgresql.org/>我们指定工作数据目录为  /usr/local/pgsql/data  (可以是任意其它地址)
+[root@VM-20-8-centos bin]# ./initdb /usr/local/pgsql/datainitdb: error: cannot be run as rootinitdb: hint: Please log in (using, e.g., "su") as the (unprivileged) user that will own the server process.# 提示不可用 root 用户执行，切换为刚刚新建的用户 postgres[root@VM-20-8-centos bin]# su - postgresLast failed login: Thu Oct 13 10:16:54 CST 2022 from 142.93.208.41 on ssh:nottyThere were 38 failed login attempts since the last successful login.[postgres@VM-20-8-centos ~]$ cd /usr/local/pgsql/bin/# 进入 pgsql/bin 目录，再次执行[postgres@VM-20-8-centos bin]$ ./initdb /usr/local/pgsql/dataThe files belonging to this database system will be owned by user "postgres".This user must also own the server process.The database cluster will be initialized with locale "en_US.UTF-8".The default database encoding has accordingly been set to "UTF8".The default text search configuration will be set to "english".Data page checksums are disabled.creating directory /usr/local/pgsql/data ... okcreating subdirectories ... okselecting dynamic shared memory implementation ... posixselecting default max_connections ... 100selecting default shared_buffers ... 128MBselecting default time zone ... Asia/Shanghaicreating configuration files ... okrunning bootstrap script ... okperforming post-bootstrap initialization ... oksyncing data to disk ... okinitdb: warning: enabling "trust" authentication for local connectionsinitdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.Success. You can now start the database server using:    pg_ctl -D /usr/local/pgsql/data -l logfile start
+启动数据库
+
+[postgres@VM-20-8-centos data]$ /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data/ -l /usr/local/pgsql/logs/logfile.log startwaiting for server to start.... doneserver started# 查看启用端口及进程[postgres@VM-20-8-centos data]$ netstat -ntlp | grep postgres(Not all processes could be identified, non-owned process info will not be shown, you would have to be root to see it all.)tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      911/postgres        tcp6       0      0 ::1:5432                :::*                    LISTEN      911/postgres
+进入  /usr/local/pgsql/bin  目录，创建用户、数据库及授权
+
+# psql 进入命令行[postgres@VM-20-8-centos bin]$ ./psql psql (15.0)Type "help" for help.# 创建用户 及 配置密码postgres=# create user platform with password 'x_platform_zxdvf12Ll';CREATE ROLE# 创建数据库 指定 所属用户postgres=# create database x_platform owner platform;CREATE DATABASE# 授权 对应 数据库 所有权限 给用户postgres=# GRANT ALL PRIVILEGES ON DATABASE x_platform to platform;GRANT# 退出命令行postgres=# \q[postgres@VM-20-8-centos bin]$
+psql 登陆数据库
+
+# -U 指定用户，-d 指定数据库，-h 指定服务器，-p 指定端口[postgres@VM-20-8-centos bin]$ ./psql -U platform -d x_platform -h 127.0.0.1 -p 5432psql (15.0)Type "help" for help.x_platform=>
+停止、重启命令
+
+# 停止  pg_ctl stop -D $PGDATA -m smart     # 等所有的连接终止后关闭数据库。如果客户端连接不终止，则无法关闭数据库# 停止  pg_ctl stop -D $PGDATA -m fast      # 相当于 oracle 数据库的 immdiate 模式# 停止  pg_ctl stop -D $PGDATA -m immediate # 相当于 oracle 数据库的 abort 模式/usr/local/pgsql/bin/pg_ctl stop -D /usr/local/pgsql/data/ -m smart# 重启/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data/ -l /usr/local/pgsql/logs/logfile.log restart
+备份，还原
+
+# dump 备份至文件# 命令格式： ./pg_dump -U 用户名 -h 127.0.0.1 -p 5432 数据库名 > 备份至文件名[postgres@VM-20-8-centos bin]$ ./pg_dump -U platform -h 127.0.0.1 -p 5432 x_platform > /home/postgres/x_platform_14-20221014.bakPassword: 输入对应数据库账号的密码# 恢复数据库，还原 dump 文件# pg_dump 创建的备份文件可以被工具 psql 识别。因此可以使用 psql 来读取 pg_dump 创建的备份文件，实现恢复数据库的功能。例如：# 命令格式： psql 数据库名 &lt; 备份至文件名# 命令格式： psql -U 用户名 -h 127.0.0.1 -p 5432 数据库名 &lt; 备份至文件名# 指定的数据库必须已经存在。如果不存在，用户应当先创建 dbname 指定的数据库，然后再执行恢复数据的命令。# psql 也支持和 pg_dump 一样的命令行选项，如 - h 和 - p 等。创建数据库 dbname 时，必须使用 template0 作为模板数据库，可以使用工具 createdb 创建数据库# 也可以在 psql 中执行 SQL 命令 create database 来创建数据库。下面是两个实例：#（1）createdb -T template0 dbname（数据库名）#（2）create database dbname template=template0[postgres@VM-20-8-centos bin]$ ./psql -U platform -h 127.0.0.1 -p 5432 数据库名 &lt; 备份至文件名# 安装方式二（RPM 安装方式）：
+# Install the repository RPM:sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-6-x86_64/pgdg-redhat-repo-latest.noarch.rpm# Install PostgreSQL:sudo yum install -y postgresql14-server# Optionally initialize the database and enable automatic start:sudo service postgresql-14 initdbsudo chkconfig postgresql-14 onsudo service postgresql-14 start# Linux 启动 PostgreSQL 通用脚本  z_postgres.sh
+#!/bin/sh## Copyright (c) xhal.cc 2022. All Rights Reserved.# Project Name: platform# Author: Hal [hal@xhal.net]# Date: 2022/10/17 下午 8:59# Version: 1.0# LastModified: 2022/10/17 下午 8:59### Linux 启动 PostgreSQL 通用脚本##进入当前目录BASE_PATH=/usr/local/pgsqlBASE_BIN_PATH=$BASE_PATH/binDATA_PATH=$BASE_PATH/data/LOG_FILE_PATH=/usr/local/pgsql/logs/logfile.logPROCESS_NAME=postgres# PostgreSQL 默认端口 5432PROCESS_PORT=5432#使用说明 用来提示参数usage()&#123;  echo "Usage: sh 脚本名.sh [start|stop|restart|status]"  exit 1&#125;#检查程序是否已运行is_exist()&#123;  # 根据应用名称，获取进程 pid  (当存在多个时不适用)  # pid=$(ps -ef|grep $PROCESS_NAME|grep -v grep|awk '&#123;print $2&#125;')  # 根据端口号 获取对应 pid (需要 root 权限)  # pid=$(netstat -nlp | grep :$PROCESS_PORT | awk '&#123;print $7&#125;' | awk -F"/" '&#123; print $1 &#125;');  pid=$(lsof -t -i:$PROCESS_PORT)  #如果不存在返回 1 存在返回 0  if [ -z "$&#123;pid&#125;" ]; then   return 1  else   return 0  fi&#125;#启动方法start()&#123;  is_exist  if [ $? -eq "0" ]; then    echo "$&#123;PROCESS_NAME&#125; - [PORT:$&#123;PROCESS_PORT&#125;] is already running .pid =$&#123;pid&#125; ."  else    echo $BASE_PATH/$PROCESS_NAME	  $BASE_BIN_PATH/pg_ctl -D $DATA_PATH -l $LOG_FILE_PATH start    echo "$&#123;PROCESS_NAME&#125; - [PORT:$&#123;PROCESS_PORT&#125;] start success"  fi&#125;#停止方法stop()&#123;  is_exist  if [ $? -eq "0" ]; then    # 停止  pg_ctl stop -D $PGDATA -m smart     # 等所有的连接终止后关闭数据库。如果客户端连接不终止，则无法关闭数据库    # 停止  pg_ctl stop -D $PGDATA -m fast      # 相当于 oracle 数据库的 immdiate 模式    # 停止  pg_ctl stop -D $PGDATA -m immediate # 相当于 oracle 数据库的 abort 模式    $BASE_BIN_PATH/pg_ctl stop -D $DATA_PATH -m smart  else    echo "$&#123;PROCESS_NAME&#125; - [PORT:$&#123;PROCESS_PORT&#125;] is not running"  fi&#125;#输出状态status()&#123;  is_exist  if [ $? -eq "0" ]; then    echo "$&#123;PROCESS_NAME&#125; - [PORT:$&#123;PROCESS_PORT&#125;] is running . pid is $&#123;pid&#125;"  else    echo "$&#123;PROCESS_NAME&#125; - [PORT:$&#123;PROCESS_PORT&#125;] is not running"  fi&#125;#重启restart()&#123;  $BASE_BIN_PATH/pg_ctl -D $DATA_PATH -l $LOG_FILE_PATH restart&#125;#根据输入参数执行对应的方法，不输入则执行使用说明case "$1" in  "start")    start	;;  "stop")    stop	;;  "status")    status	;;  "restart")    restart	;;  *)    usage	;;esac]]></content>
+      <categories>
+        <category>运维部署</category>
+      </categories>
+      <tags>
+        <tag>Centos</tag>
+        <tag>PostgreSQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>让ChatGPT教你使用Hexo搭建博客</title>
+    <url>/2023/03/c3f3fbf7.html</url>
+    <content><![CDATA[
+问 ChatGPT:  怎么用 hexo 搭建一个博客网站
+
+
+# 使用 Hexo 搭建博客网站
+Hexo 是一个快速、简洁且高效的博客框架，它使用 Markdown 解析文章，支持 EJS、Swig 等模板引擎渲染页面，可以快速生成静态网页。
+# 安装 Node.js
+Hexo 是基于 Node.js 的，所以需要先安装 Node.js。可以在 Node.js 官网下载安装包进行安装。
+# 安装 Hexo
+安装 Node.js 之后，就可以使用 npm 安装 Hexo 了。在命令行中输入以下命令：
+npm install -g hexo-cli# 初始化博客
+安装 Hexo 之后，需要初始化博客。在命令行中进入想要存放博客的目录，然后输入以下命令：
+hexo init blogcd blognpm install# 生成静态页面
+在博客目录下，输入以下命令可以生成静态页面：
+hexo generate    # 可使用简短命令  hexo g# 启动本地服务器
+在博客目录下，输入以下命令可以启动本地服务器：
+hexo server   # 可使用简短命令  hexo s# 发布博客
+在博客目录下，输入以下命令可以发布博客：
+hexo deploy    # 可使用简短命令  hexo d# 更换主题
+Hexo 支持更换主题，可以在 Hexo 官网下载主题，然后将主题解压到博客目录下的 themes 文件夹中，最后在博客目录下的_config.yml 文件中修改 theme 字段为主题名称即可。
+# 编写文章
+在博客目录下，输入以下命令可以新建一篇文章：
+hexo new MyNewPost新建的文章会在博客目录下的 source/_posts 文件夹中生成一个 Markdown 文件，可以使用 Markdown 语法编写文章
+
+问 ChatGPT: 怎么配置使用 hexo admin
+
+# 使用 Hexo Admin 管理博客
+Hexo Admin 是一个基于 Web 的 Hexo 博客管理工具，可以方便地管理博客文章、页面、标签、分类、设置等内容。
+# 安装 Hexo Admin
+在博客目录下，输入以下命令可以安装 Hexo Admin：
+npm install --save hexo-admin# 启用 Hexo Admin
+在博客目录下的_config.yml 文件中添加以下配置：
+# Hexo Adminadmin:  username: admin  password_hash: 098f6bcd4621d373cade4e832627b4f6 # admin  secret: a-secret-used-to-protect-your-password  deployCommand: hexo deploy其中，username 为管理员用户名，password_hash 为管理员密码的 MD5 值，可以使用 MD5 在线加密进行加密，secret 为用于保护密码的密钥，deployCommand 为发布博客的命令。
+# 启动 Hexo Admin
+在博客目录下，输入以下命令可以启动 Hexo Admin：
+hexo server -d然后在浏览器中访问    http://localhost:4000/admin
+即可进入 Hexo Admin 管理界面。
+# 编写文章
+在 Hexo Admin 管理界面中，可以方便地新建、编辑、删除文章，也可以管理页面、标签、分类、设置等内容。
+]]></content>
+      <categories>
+        <category>建站</category>
+      </categories>
+      <tags>
+        <tag>ChatGPT</tag>
+        <tag>AI</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
 </search>

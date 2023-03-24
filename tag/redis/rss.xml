@@ -26,6 +26,8 @@
         <category>音乐</category>
         <category>人生</category>
         <category>Windows</category>
+        <category>PostgreSQL</category>
+        <category>Hexo</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2023/01/dacefe23.html</guid>
             <title>Redis7 源码安装</title>

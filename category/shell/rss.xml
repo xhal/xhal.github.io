@@ -26,6 +26,8 @@
         <category>音乐</category>
         <category>人生</category>
         <category>Windows</category>
+        <category>PostgreSQL</category>
+        <category>Hexo</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2023/03/1e014c62.html</guid>
             <title>Windows切换JDK版本（Bat脚本）</title>

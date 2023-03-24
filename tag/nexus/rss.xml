@@ -26,6 +26,8 @@
         <category>音乐</category>
         <category>人生</category>
         <category>Windows</category>
+        <category>PostgreSQL</category>
+        <category>Hexo</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2022/05/cd130dc5.html</guid>
             <title>Centos安装Maven私服Nexus3</title>

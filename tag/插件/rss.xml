@@ -26,6 +26,8 @@
         <category>音乐</category>
         <category>人生</category>
         <category>Windows</category>
+        <category>PostgreSQL</category>
+        <category>Hexo</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2022/04/fbbabe1b.html</guid>
             <title>Maven插件[versions-maven-plugin]</title>
