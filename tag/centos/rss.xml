@@ -5,8 +5,8 @@
         <link>http://xsea.cc</link>
         <description>学习、编程、生活</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 13 Feb 2023 21:27:04 +0800</pubDate>
-        <lastBuildDate>Mon, 13 Feb 2023 21:27:04 +0800</lastBuildDate>
+        <pubDate>Tue, 09 May 2023 14:13:39 +0800</pubDate>
+        <lastBuildDate>Tue, 09 May 2023 14:13:39 +0800</lastBuildDate>
         <category>Openresty</category>
         <category>Redis</category>
         <category>Nginx</category>
@@ -28,6 +28,49 @@
         <category>Windows</category>
         <category>PostgreSQL</category>
         <category>Hexo</category>
+        <category>EncryptedTag</category>
+        <category>web</category>
+        <category>http</category>
+        <category>防火墙</category>
+        <category>firewall</category>
+        <item>
+            <guid isPermalink="true">http://xsea.cc/2023/05/62f1cb3f.html</guid>
+            <title>Centos7.9防火墙配置</title>
+            <link>http://xsea.cc/2023/05/62f1cb3f.html</link>
+            <category>Centos</category>
+            <category>防火墙</category>
+            <category>firewall</category>
+            <pubDate>Tue, 09 May 2023 14:13:39 +0800</pubDate>
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;/assets/css/APlayer.min.css&#34;&gt;&lt;script src=&#34;/assets/js/APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;blockquote&gt;
+&lt;p&gt;在 CentOS 7 中，可以使用  &lt;code&gt;firewalld&lt;/code&gt;  命令来管理防火墙，包括放开指定端口&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;在 CentOS 7 中，可以使用  &lt;code&gt;firewalld&lt;/code&gt;  命令来管理防火墙，包括放开指定端口。下面是放开指定端口的步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先，检查防火墙的状态，确认是否正在运行。可以使用以下命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl status firewalld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果防火墙正在运行，则会输出  &lt;code&gt;active (running)&lt;/code&gt; 。如果防火墙没有运行，则可以使用以下命令启动防火墙：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl start firewalld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;放开指定端口。例如，要放开 8080 端口，可以使用以下命令：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中， &lt;code&gt;--zone=public&lt;/code&gt;  表示将规则应用于公共区域， &lt;code&gt;--add-port=8080/tcp&lt;/code&gt;  表示放开 8080 端口的 TCP 协议连接， &lt;code&gt;--permanent&lt;/code&gt;  表示将规则永久保存。执行完该命令后，需要重新加载防火墙规则才能生效，可以使用以下命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;查看已经放开的端口。可以使用以下命令查看当前已经放开的端口：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;sudo firewall-cmd --zone=public --list-ports
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果输出中包含  &lt;code&gt;8080/tcp&lt;/code&gt; ，则表示已经成功放开了 8080 端口。&lt;/p&gt;
+&lt;p&gt;注意：在放开端口之前，需要确保该端口是需要开放的，并且已经配置好了相关服务。同时，也要注意安全问题，只开放必要的端口，并设置合适的防火墙规则。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://xsea.cc/2023/02/37631c5.html</guid>
             <title>Linux/Centos 环境Shell会话关闭后，本会话启动进程被终止</title>

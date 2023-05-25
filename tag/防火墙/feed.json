@@ -1,0 +1,20 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "星辰大海 • All posts by \"防火墙\" tag",
+    "description": "学习、编程、生活",
+    "home_page_url": "http://xsea.cc",
+    "items": [
+        {
+            "id": "http://xsea.cc/2023/05/62f1cb3f.html",
+            "url": "http://xsea.cc/2023/05/62f1cb3f.html",
+            "title": "Centos7.9防火墙配置",
+            "date_published": "2023-05-09T06:13:39.000Z",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"/assets/css/APlayer.min.css\"><script src=\"/assets/js/APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><blockquote>\n<p>在 CentOS 7 中，可以使用  <code>firewalld</code>  命令来管理防火墙，包括放开指定端口</p>\n</blockquote>\n<span id=\"more\"></span>\n<p>在 CentOS 7 中，可以使用  <code>firewalld</code>  命令来管理防火墙，包括放开指定端口。下面是放开指定端口的步骤：</p>\n<ol>\n<li>首先，检查防火墙的状态，确认是否正在运行。可以使用以下命令：</li>\n</ol>\n<pre><code>sudo systemctl status firewalld\n</code></pre>\n<p>如果防火墙正在运行，则会输出  <code>active (running)</code> 。如果防火墙没有运行，则可以使用以下命令启动防火墙：</p>\n<pre><code>sudo systemctl start firewalld\n</code></pre>\n<ol start=\"2\">\n<li>放开指定端口。例如，要放开 8080 端口，可以使用以下命令：</li>\n</ol>\n<pre><code>sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent\n</code></pre>\n<p>其中， <code>--zone=public</code>  表示将规则应用于公共区域， <code>--add-port=8080/tcp</code>  表示放开 8080 端口的 TCP 协议连接， <code>--permanent</code>  表示将规则永久保存。执行完该命令后，需要重新加载防火墙规则才能生效，可以使用以下命令：</p>\n<pre><code>sudo firewall-cmd --reload\n</code></pre>\n<ol start=\"3\">\n<li>查看已经放开的端口。可以使用以下命令查看当前已经放开的端口：</li>\n</ol>\n<pre><code>sudo firewall-cmd --zone=public --list-ports\n</code></pre>\n<p>如果输出中包含  <code>8080/tcp</code> ，则表示已经成功放开了 8080 端口。</p>\n<p>注意：在放开端口之前，需要确保该端口是需要开放的，并且已经配置好了相关服务。同时，也要注意安全问题，只开放必要的端口，并设置合适的防火墙规则。</p>\n",
+            "tags": [
+                "Centos",
+                "防火墙",
+                "firewall"
+            ]
+        }
+    ]
+}

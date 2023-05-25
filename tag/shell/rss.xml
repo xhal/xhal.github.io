@@ -28,6 +28,11 @@
         <category>Windows</category>
         <category>PostgreSQL</category>
         <category>Hexo</category>
+        <category>EncryptedTag</category>
+        <category>web</category>
+        <category>http</category>
+        <category>防火墙</category>
+        <category>firewall</category>
         <item>
             <guid isPermalink="true">http://xsea.cc/2023/03/1e014c62.html</guid>
             <title>Windows切换JDK版本（Bat脚本）</title>
@@ -41,7 +46,7 @@
 &lt;p&gt;非常麻烦，所以写个脚本，一键搞定；&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;先来看看效果：&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;http://img.xhal.cc/picgo/uTools_1679382309562.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://static.xhal.net/picgo/uTools_1679382309562.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们将 JDK 统一放置在同一个目录下，比如  &lt;code&gt;D:\Env\Java&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;脚本简单实现逻辑，就是将这指定目录下，所有子目录都找出来，并按顺序生成编号&lt;/p&gt;
 &lt;p&gt;脚本根据用户输入的编号对应的目录，更新环境变量  &lt;code&gt;JAVA_HOME&lt;/code&gt;&lt;/p&gt;
